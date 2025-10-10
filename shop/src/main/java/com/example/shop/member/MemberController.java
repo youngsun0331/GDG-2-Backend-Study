@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/members")
 public class MemberController {
 
-    private final MemberSerivce memberSerivce;
+    private final MemberService memberSerivce;
 
     @PostMapping
     public ResponseEntity<Void> createMember(@RequestBody MemberCreateRequest request){
@@ -30,24 +30,24 @@ public class MemberController {
         return ResponseEntity.ok(members);
     }
 
-    @GetMapping(/"{membersId}")
-    public ResponseEntity<Member> getAllMembers(@PathVariable Long memberId) {
+    @GetMapping("/{memberId}")
+    public ResponseEntity<Member> getMember(@PathVariable Long memberId) {
         //Service 계층에서 memberId 하나 가져옴
-        Member member = memberSerivce.getMember(memberId);
-        return ResponseEntity.ok(member)
+        Member member = memberSerivce.getMemberById(memberId);
+        return ResponseEntity.ok(member);
     }
 
 
-    @PatchMapping("/{membersId}")
+    @PatchMapping("/{memberId}")
     public ResponseEntity<Void> updateMember(
             @PathVariable Long memberId,
             @RequestBody MemberUpdateRequest request){
-        memberSerivce.updateMamber(memberId,request);
+        memberSerivce.updateMember(memberId,request);
         return ResponseEntity.ok().build();
     }
 
 
-    @DeleteMapping("/{membersId}")
+    @DeleteMapping("/{memberId}")
     public ResponseEntity<Void> deleteMember(@PathVariable Long memberId){
         memberSerivce.deleteMember(memberId);
         return ResponseEntity.noContent().build();

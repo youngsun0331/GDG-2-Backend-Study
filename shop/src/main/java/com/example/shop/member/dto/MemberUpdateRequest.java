@@ -1,5 +1,8 @@
 package com.example.shop.member.dto;
 
+import lombok.Getter;
+
+@Getter
 public class MemberUpdateRequest {
 
     private String password;
