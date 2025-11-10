@@ -1,7 +1,8 @@
 package com.example.shop.product;
 
 
-import jdk.javadoc.doclet.Reporter;
+import com.example.shop.product.dto.ProductCreateRequest;
+import com.example.shop.product.dto.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,27 +29,27 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/{productId}")
+    @GetMapping("/{productName}")
     public ResponseEntity<Product> getProduct(
-                @PathVariable Long productId){
+                @PathVariable String productName){
 
-        Product product = productService.getProductById(productId);
+        Product product = productService.getProductByName(productName);
         return ResponseEntity.ok(product);
     }
 
 
-    @PatchMapping("/{productId}")
+    @PatchMapping("/{productName}")
     public ResponseEntity<Void> updateProduct(
                 @RequestBody ProductUpdateRequest request,
-                @PathVariable Long productId){
-        productService.updateProduct(productId,request);
+                @PathVariable String productName){
+        productService.updateProduct(productName,request);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{productId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId){
+    @DeleteMapping("/{productName}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productName){
 
-        productService.deleteProduct(productId);
+        productService.deleteProduct(productName);
         return ResponseEntity.ok().build();
     }
 

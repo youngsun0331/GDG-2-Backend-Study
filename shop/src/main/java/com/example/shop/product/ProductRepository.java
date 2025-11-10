@@ -1,6 +1,6 @@
 package com.example.shop.product;
 
-import jakarta.persistence.Entity;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -23,11 +23,10 @@ public class ProductRepository {
     }
 
 
-
-    public Product findByProductId(String productId){
+    public Product findByProductId(String productName){
         List<Product> result = em.createQuery(
-                "SELECT p FROM product p WHERE productId = :productId",Product.class
-        ).setParameter("productId",productId).getResultList();
+                "SELECT p FROM product p WHERE productName = :productName",Product.class
+        ).setParameter("productName",productName).getResultList();
 
         return result.isEmpty() ? null : result.get(0);
     }

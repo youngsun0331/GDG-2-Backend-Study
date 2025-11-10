@@ -10,7 +10,7 @@ description = '2025-5 GDG Backend Study'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 

@@ -2,8 +2,9 @@ package com.example.shop.order;
 
 
 import com.example.shop.member.MemberService;
+import com.example.shop.order.dto.OrderCreateRequest;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.Order;
+import com.example.shop.order.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

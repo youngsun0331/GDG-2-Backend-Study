@@ -1,5 +1,7 @@
 package com.example.shop.product;
 
+import com.example.shop.product.dto.ProductCreateRequest;
+import com.example.shop.product.dto.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,41 +15,43 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    //@Transactional
+    @Transactional
     public Long createProduct(ProductCreateRequest request){
-        Product existingProduct = productRepository.findByProductId(request.getProductId());
+        Product existingProduct = productRepository.findByProductId(request.getProductName());
         if(existingProduct == null) {
-            throw new RuntimeException("이미 존재하는 상품명 입니다"+request.getProductId());
+            throw new RuntimeException("이미 존재하는 상품명 입니다"+request.getProductName());
         }
         //
         Product product = new Product(
-                request.get
-
-        )
+                request.getProductName()
+        );
         productRepository.save(product);
 
         return product.getId();
     }
 
+    @Transactional
     public List<Product> getAllProducts() {
         return productRepository.findAll();
 
     }
 
-    public Product getProductById(Long productId){
-        Product product = productRepository.findByProductId(productId);
+    @Transactional
+    public Product getProductByName(String productName){
+        Product product = productRepository.findByProductId(productName);
         if(product == null){
-            throw new RuntimeException("존재하지 않는 상품입니다"+productId);
+            throw new RuntimeException("존재하지 않는 상품입니다"+productName);
         }
         return product;
     }
 
-    public void updateProduct(Long productId,ProductUpdateRequest request){
-        Product product = productRepository.findByProductId(productId);
+    @Transactional
+    public void updateProduct(String productName, ProductUpdateRequest request){
+        Product product = productRepository.findByProductId(productName);
         if(product == null){
-            throw new RuntimeException("존재하지 않는 상품입니다"+productId);
+            throw new RuntimeException("존재하지 않는 상품입니다"+productName);
         }
-        product.updateInfo(request.getPassword(),request.get);
+        product.updateInfo(request.getProductName());
 
     }
 

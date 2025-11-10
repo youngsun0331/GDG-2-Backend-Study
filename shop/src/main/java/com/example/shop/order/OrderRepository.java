@@ -3,7 +3,7 @@ package com.example.shop.order;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.hibernate.query.Order;
+import com.example.shop.order.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class OrderRepository {
 
     }
 
-    public Order findByorderId(String orderId){
+    public Order findOrderById(String orderId){
         List<Order> result = em.createQuery(
                 "SELECT o FROM order WHERE orderId = :orderId",Order.class
         ).setParameter("orderId",orderId).getResultList();

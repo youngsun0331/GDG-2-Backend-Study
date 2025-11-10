@@ -1,32 +1,38 @@
 package com.example.shop.order;
 
+import com.example.shop.order.dto.OrderCreateRequest;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.Order;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import com.example.shop.order.Order;
 
-@Service
 @RequiredArgsConstructor
+@Setter
 public class OrderService {
 
     private final OrderRepository orderRepository;
 
 
-    public long createOrder(OrderCreateRequest orderCreateRequest) {
-        long existOrder = orderRepository.findOrderById(orderCreateRequest.getId());
-        if(existOrder != null) {
-            throw new RuntimeException("이미 있는 주문입니다"+orderCreateRequest.getId());
-        }
+    public long createOrder(OrderCreateRequest request) {
+        //Order 의 ID는 DB 에 등록할때 생김 -> html에서 처리 x 그러면 어떻게 비교하지?
+//        Order existOrder = orderRepository.findOrderById(request.getId());
+//        if(existOrder != null) {
+//            throw new RuntimeException("이미 있는 주문입니다"+request.getId());
+//        }
         Order order = new Order(
-
+                request.getOrderDate(),
+                request.getTotalPrice(),
+                request.getStatus(),
+                request.getPointUsed(),
+                request.getCashAmount()
         );
+
         orderRepository.save(order);
-        return order.getId();
+        return order.getOrderId();
     }
     public List<Order> getAllOrder() {
-        return orderRepository.getAll();
-        return orderRepository.getAll();
+        return orderRepository.findAll();
     }
 
     public Order getOrderById (long orderId){
