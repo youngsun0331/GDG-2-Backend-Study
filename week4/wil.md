@@ -55,3 +55,18 @@ jpa만 사용 가능
 
     + EAGER : 즉시로딩 , Order 객체 정보 가져올때  
     Member 객체의 모든 정보를 함께 한번에 가져옴
+
+
+### 다이어그램
+![ERD 다이어그램](image.png)
+
+
+### H2
+![h2](h2.png)
+
+### order ok
+
+![order_success](order_ok.png)
+
+### order fail
+![order_fail](order_error.png)

@@ -1,26 +1,28 @@
 package com.example.shop.order;
 
 import com.example.shop.order.dto.OrderCreateRequest;
+import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
-import com.example.shop.order.Order;
 
 @RequiredArgsConstructor
-@Setter
+@Service
 public class OrderService {
 
     private final OrderRepository orderRepository;
 
 
+    @Transactional
     public long createOrder(OrderCreateRequest request) {
         //Order 의 ID는 DB 에 등록할때 생김 -> html에서 처리 x 그러면 어떻게 비교하지?
 //        Order existOrder = orderRepository.findOrderById(request.getId());
 //        if(existOrder != null) {
 //            throw new RuntimeException("이미 있는 주문입니다"+request.getId());
 //        }
-        Order order = new Order(
+        Orders orders = new Orders(
                 request.getOrderDate(),
                 request.getTotalPrice(),
                 request.getStatus(),
@@ -28,24 +30,30 @@ public class OrderService {
                 request.getCashAmount()
         );
 
-        orderRepository.save(order);
-        return order.getOrderId();
+        orderRepository.save(orders);
+        return orders.getOrderId();
     }
-    public List<Order> getAllOrder() {
+
+
+    @Transactional
+    public List<Orders> getAllOrder() {
+
         return orderRepository.findAll();
     }
 
-    public Order getOrderById (long orderId){
-        Order order = orderRepository.findById(orderId);
-        if( order != null){
+    @Transactional
+    public Orders getOrderById (long orderId){
+        Orders orders = orderRepository.findById(orderId);
+        if( orders == null){
             throw new RuntimeException("주문정보를 찾을 수 없습니다"+orderId);
         }
-        return order;
+        return orders;
     }
 
+    @Transactional
     public void deleteOrderById(long orderId){
-        Order order = orderRepository.findById(orderId);
-        if( order != null){
+        Orders orders = orderRepository.findById(orderId);
+        if( orders != null){
             throw new RuntimeException("주문정보를 찾을 수 없습니다"+orderId);
         }
 

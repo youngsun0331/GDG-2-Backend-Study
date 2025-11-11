@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order {
+public class Orders {
 
 
     @Id
@@ -40,7 +40,7 @@ public class Order {
     @Column(name = "cash_amount")
     private int cashAmount;
 
-    public Order( LocalDateTime orderDate, int totalPrice, String status, int pointUsed, int cashAmount) {
+    public Orders(LocalDateTime orderDate, int totalPrice, String status, int pointUsed, int cashAmount) {
 
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;

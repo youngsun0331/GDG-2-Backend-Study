@@ -3,7 +3,6 @@ package com.example.shop.order;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import com.example.shop.order.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,33 +13,33 @@ public class OrderRepository {
     @PersistenceContext
     private EntityManager em ;
 
-    public Order findById(Long orderid){
-        return em.find(Order.class, orderid);
+    public Orders findById(Long orderid){
+        return em.find(Orders.class, orderid);
 
     }
 
-    public List<Order> findAll(){
-        return em.createQuery("SELECT o FROM order o", Order.class)
+    public List<Orders> findAll(){
+        return em.createQuery("SELECT o FROM orders o", Orders.class)
                 .getResultList();
 
     }
 
-    public Order findOrderById(String orderId){
-        List<Order> result = em.createQuery(
-                "SELECT o FROM order WHERE orderId = :orderId",Order.class
+    public Orders findOrderById(String orderId){
+        List<Orders> result = em.createQuery(
+                "SELECT o FROM orders WHERE orderId = :orderId", Orders.class
         ).setParameter("orderId",orderId).getResultList();
 
         return result.isEmpty() ? null : result.get(0);
     }
 
 
-    public void save(Order order){
-        em.persist(order);
+    public void save(Orders orders){
+        em.persist(orders);
     }
 
     public void deleteById(Long id){
-        Order order = em.find(Order.class, id);
-        em.remove(order);
+        Orders orders = em.find(Orders.class, id);
+        em.remove(orders);
     }
 
 

@@ -1,14 +1,11 @@
 package com.example.shop.order;
 
 
-import com.example.shop.member.MemberService;
 import com.example.shop.order.dto.OrderCreateRequest;
 import lombok.RequiredArgsConstructor;
-import com.example.shop.order.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
 import java.net.URI;
 import java.util.List;
 
@@ -26,15 +23,15 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAllOrder(){
-        List<Order> order = orderService.getAllOrder();
-        return ResponseEntity.ok(order);
+    public ResponseEntity<List<Orders>> getAllOrder(){
+        List<Orders> orders = orderService.getAllOrder();
+        return ResponseEntity.ok(orders);
     }
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<Order> getOrder(@PathVariable long orderId){
-        Order order = orderService.getOrderById(orderId);
-        return ResponseEntity.ok(order);
+    public ResponseEntity<Orders> getOrder(@PathVariable long orderId){
+        Orders orders = orderService.getOrderById(orderId);
+        return ResponseEntity.ok(orders);
     }
     @DeleteMapping("/{orderId}")
     public ResponseEntity<Void> deleteOrder(@PathVariable long orderId){
