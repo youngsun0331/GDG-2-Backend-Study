@@ -36,3 +36,4 @@ A타입 에러 발생?
 # 협업을 위한 API 명세 : Swagger(OpenAPI)
 
 ![image](swagger.png)
+.
