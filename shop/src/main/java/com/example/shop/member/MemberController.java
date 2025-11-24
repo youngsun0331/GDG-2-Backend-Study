@@ -3,6 +3,7 @@ package com.example.shop.member;
 
 import com.example.shop.member.dto.MemberCreateRequest;
 import com.example.shop.member.dto.MemberUpdateRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,8 @@ public class MemberController {
     private final MemberService memberSerivce;
 
     @PostMapping
-    public ResponseEntity<Void> createMember(@RequestBody MemberCreateRequest request){
+    public ResponseEntity<Void> createMember(
+            @RequestBody @Valid MemberCreateRequest request){
         Long memberId = memberSerivce.createMember(request);
         return ResponseEntity.created(URI.create("/members"+ memberId)).build();
     }
@@ -41,7 +43,7 @@ public class MemberController {
     @PatchMapping("/{memberId}")
     public ResponseEntity<Void> updateMember(
             @PathVariable Long memberId,
-            @RequestBody MemberUpdateRequest request){
+            @RequestBody @Valid MemberUpdateRequest request){
         memberSerivce.updateMember(memberId,request);
         return ResponseEntity.ok().build();
     }

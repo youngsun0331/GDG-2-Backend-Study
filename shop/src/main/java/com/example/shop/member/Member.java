@@ -23,7 +23,7 @@ public class Member {
     private String password;
 
     // 전화번호
-    @Column(name = "member_phone",length=50)
+    @Column(name = "member_phone",length=3)
     private String phoneNumber;
 
     // 주소
@@ -44,15 +44,9 @@ public class Member {
 
     // 회원 정보 수정 메서드(loginId는 변경 불가)
     public void updateInfo(String password, String phoneNumber, String address) {
-        if (password != null) {
-            this.password = password;
-        }
-        if (phoneNumber != null) {
-            this.phoneNumber = phoneNumber;
-        }
-        if (address != null) {
-            this.address = address;
-        }
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 }
 
