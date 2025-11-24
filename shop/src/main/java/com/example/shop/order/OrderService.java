@@ -1,5 +1,6 @@
 package com.example.shop.order;
 
+import com.example.shop.common.message.ErrorMessage;
 import com.example.shop.order.dto.OrderCreateRequest;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,12 @@ public class OrderService {
 
     @Transactional
     public long createOrder(OrderCreateRequest request) {
-        //Order 의 ID는 DB 에 등록할때 생김 -> html에서 처리 x 그러면 어떻게 비교하지?
-//        Order existOrder = orderRepository.findOrderById(request.getId());
-//        if(existOrder != null) {
-//            throw new RuntimeException("이미 있는 주문입니다"+request.getId());
-//        }
+        //
+//       Orders existOrder = orderRepository.findOrderById(request.getId());
+//       if(existOrder != null) {
+//       throw new RuntimeException("이미 있는 주문입니다"+request.getId());
+//      }
+
         Orders orders = new Orders(
                 request.getOrderDate(),
                 request.getTotalPrice(),
@@ -45,7 +47,7 @@ public class OrderService {
     public Orders getOrderById (long orderId){
         Orders orders = orderRepository.findById(orderId);
         if( orders == null){
-            throw new RuntimeException("주문정보를 찾을 수 없습니다"+orderId);
+            throw new RuntimeException(ErrorMessage.ORDER_NOT_FOUND+orderId);
         }
         return orders;
     }
@@ -54,7 +56,7 @@ public class OrderService {
     public void deleteOrderById(long orderId){
         Orders orders = orderRepository.findById(orderId);
         if( orders != null){
-            throw new RuntimeException("주문정보를 찾을 수 없습니다"+orderId);
+            throw new RuntimeException(ErrorMessage.ORDER_NOT_FOUND+orderId);
         }
 
         orderRepository.deleteById(orderId);

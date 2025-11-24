@@ -34,7 +34,8 @@ public class Orders {
     @Column(name ="status",length = 20)
     private String status;
 
-    @Column(name = "point_used")
+
+    @Column(name = "point_used", length = 5)
     private int pointUsed;
 
     @Column(name = "cash_amount")

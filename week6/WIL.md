@@ -30,4 +30,9 @@ A타입 에러 발생?
 > AOP vs OOP
 > AOP = 부가 기능 모듈화
 
+![image](400BadRequest.png)
+
+
 # 협업을 위한 API 명세 : Swagger(OpenAPI)
+
+![image](swagger.png)

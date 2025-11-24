@@ -23,7 +23,7 @@ public class Member {
     private String password;
 
     // 전화번호
-    @Column(name = "member_phone",length=3)
+    @Column(name = "member_phone",length=20)
     private String phoneNumber;
 
     // 주소
